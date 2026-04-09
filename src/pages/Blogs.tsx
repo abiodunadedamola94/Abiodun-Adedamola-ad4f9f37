@@ -1,115 +1,80 @@
-import { Calendar, Clock, ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { ArrowUpRight } from "lucide-react";
 
 const blogPosts = [
   {
     title: "Building Scalable React Applications",
     excerpt: "Learn the best practices for structuring large-scale React applications with proper state management and component architecture.",
-    date: "Dec 28, 2024",
-    readTime: "8 min read",
-    tags: ["React", "Architecture"],
+    date: "Dec 2024",
+    tag: "DEVELOPMENT",
+    tagClass: "border-blue-500/20 bg-blue-500/10 text-blue-300",
   },
   {
     title: "The Future of Web Development",
     excerpt: "Exploring emerging trends in web development including AI integration, edge computing, and new frameworks.",
-    date: "Dec 20, 2024",
-    readTime: "6 min read",
-    tags: ["Web Dev", "Trends"],
+    date: "Dec 2024",
+    tag: "TRENDS",
+    tagClass: "border-emerald-500/20 bg-emerald-500/10 text-emerald-300",
   },
   {
     title: "Mastering TypeScript Generics",
     excerpt: "A deep dive into TypeScript generics and how to use them effectively in your projects.",
-    date: "Dec 15, 2024",
-    readTime: "10 min read",
-    tags: ["TypeScript", "Tutorial"],
+    date: "Nov 2024",
+    tag: "TUTORIAL",
+    tagClass: "border-amber-500/20 bg-amber-500/10 text-amber-300",
   },
   {
     title: "Design Systems That Scale",
     excerpt: "How to build and maintain design systems that grow with your organization.",
-    date: "Dec 10, 2024",
-    readTime: "7 min read",
-    tags: ["Design", "Systems"],
+    date: "Nov 2024",
+    tag: "DESIGN",
+    tagClass: "border-violet-500/20 bg-violet-500/10 text-violet-300",
   },
   {
     title: "Performance Optimization Tips",
     excerpt: "Practical tips for optimizing your web application's performance and user experience.",
-    date: "Dec 5, 2024",
-    readTime: "5 min read",
-    tags: ["Performance", "Tips"],
+    date: "Oct 2024",
+    tag: "PERFORMANCE",
+    tagClass: "border-rose-500/20 bg-rose-500/10 text-rose-300",
   },
 ];
 
 export default function Blogs() {
   return (
-    <div className="min-h-screen px-6 py-12 md:py-20">
-      <div className="max-w-4xl mx-auto space-y-12">
-        {/* Header */}
-        <div className="space-y-4">
-          <h1 className="text-3xl md:text-5xl font-display font-bold">
-            My <span className="gradient-text">Blog</span>
-          </h1>
-          <p className="text-muted-foreground text-lg">
+    <div className="min-h-screen px-5 py-10 sm:px-6 sm:py-12">
+      <div className="max-w-[560px] mx-auto space-y-8">
+        <section>
+          <h2 className="mb-1 text-[15px] font-semibold tracking-tight text-foreground">
+            Blog
+          </h2>
+          <p className="mb-6 text-xs leading-5 text-muted-foreground">
             Thoughts, tutorials, and insights on development and design.
           </p>
-        </div>
 
-        {/* Blog Posts */}
-        <div className="space-y-6">
-          {blogPosts.map((post, index) => (
-            <article 
-              key={index}
-              className="group rounded-2xl bg-card border border-border p-6 hover:border-primary/30 transition-all duration-300 cursor-pointer"
-            >
-              <div className="flex flex-col md:flex-row md:items-start gap-4">
-                {/* Thumbnail placeholder */}
-                <div className="w-full md:w-32 h-24 md:h-20 rounded-xl bg-gradient-to-br from-primary/10 to-accent/10 flex-shrink-0" />
-
-                {/* Content */}
-                <div className="flex-1 space-y-3">
-                  <div className="flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
-                    <span className="flex items-center gap-1">
-                      <Calendar className="w-3.5 h-3.5" />
-                      {post.date}
-                    </span>
-                    <span className="flex items-center gap-1">
-                      <Clock className="w-3.5 h-3.5" />
-                      {post.readTime}
-                    </span>
-                  </div>
-
-                  <h2 className="font-display font-semibold text-lg group-hover:text-primary transition-colors">
-                    {post.title}
-                  </h2>
-
-                  <p className="text-muted-foreground text-sm line-clamp-2">
-                    {post.excerpt}
-                  </p>
-
-                  <div className="flex items-center justify-between">
-                    <div className="flex gap-2">
-                      {post.tags.map((tag) => (
-                        <span 
-                          key={tag}
-                          className="px-2 py-1 text-xs rounded-md bg-secondary text-muted-foreground"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                    <ArrowRight className="w-4 h-4 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all" />
-                  </div>
+          <div className="space-y-3">
+            {blogPosts.map((post) => (
+              <article
+                key={post.title}
+                className="group rounded-[22px] border border-border bg-card px-4 py-4 shadow-[0_1px_0_rgba(255,255,255,0.02)_inset] transition-colors hover:border-muted-foreground/15 hover:bg-secondary cursor-pointer"
+              >
+                <div className="mb-2 flex items-start justify-between gap-3">
+                  <h3 className="text-xs font-medium text-foreground">{post.title}</h3>
+                  <ArrowUpRight size={14} className="mt-0.5 flex-shrink-0 text-muted-foreground/50 group-hover:text-foreground transition-colors" />
                 </div>
-              </div>
-            </article>
-          ))}
-        </div>
 
-        {/* Load More */}
-        <div className="text-center">
-          <Button variant="outline" className="border-border">
-            Load More Posts
-          </Button>
-        </div>
+                <p className="max-w-[490px] text-[11px] leading-5 text-muted-foreground">
+                  {post.excerpt}
+                </p>
+
+                <div className="mt-4 flex items-center justify-between gap-4">
+                  <span className={`rounded-full border px-2.5 py-1 text-[10px] tracking-[0.08em] ${post.tagClass}`}>
+                    {post.tag}
+                  </span>
+                  <span className="text-[10px] text-muted-foreground/60">{post.date}</span>
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
       </div>
     </div>
   );

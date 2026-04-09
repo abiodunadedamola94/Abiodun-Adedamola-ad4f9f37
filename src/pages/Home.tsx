@@ -1,79 +1,160 @@
-import { ArrowRight, Github, Linkedin, Twitter } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { ArrowUpRight } from "lucide-react";
 import { Link } from "react-router-dom";
 
 export default function Home() {
   return (
-    <div className="min-h-screen flex items-center justify-center px-6 py-12">
-      <div className="max-w-3xl mx-auto text-center space-y-8">
-        {/* Avatar/Photo placeholder */}
-        <div className="w-32 h-32 mx-auto rounded-full bg-gradient-to-br from-primary to-accent p-1 animate-pulse-glow">
-          <div className="w-full h-full rounded-full bg-card flex items-center justify-center">
-            <span className="text-4xl font-display font-bold gradient-text">JD</span>
+    <div className="min-h-screen px-5 py-10 sm:px-6 sm:py-12">
+      <div className="max-w-[560px] mx-auto space-y-12">
+        {/* Hero */}
+        <section className="pt-4 sm:pt-8">
+          <div className="mb-4">
+            <div className="h-10 w-10 overflow-hidden rounded-full border border-border bg-card shadow-[0_0_0_1px_rgba(255,255,255,0.04)]">
+              <svg viewBox="0 0 40 40" className="h-full w-full">
+                <defs>
+                  <radialGradient id="avatarGlow" cx="35%" cy="30%" r="80%">
+                    <stop offset="0%" stopColor="#6a6a6a" />
+                    <stop offset="60%" stopColor="#242424" />
+                    <stop offset="100%" stopColor="#0d0d0d" />
+                  </radialGradient>
+                </defs>
+                <rect width="40" height="40" rx="20" fill="url(#avatarGlow)" />
+                <circle cx="20" cy="16" r="7" fill="#9f9f9f" opacity="0.92" />
+                <path d="M10 34c1.8-6 5.2-9 10-9s8.2 3 10 9" fill="#6f6f6f" opacity="0.82" />
+              </svg>
+            </div>
           </div>
-        </div>
 
-        {/* Name & Title */}
-        <div className="space-y-4 animate-fade-in" style={{ animationDelay: "0.1s" }}>
-          <h1 className="text-4xl md:text-6xl font-display font-bold">
-            Hi, I'm <span className="gradient-text">John Doe</span>
+          <h1 className="text-xl font-semibold tracking-tight text-foreground">
+            Hey, Adedamola here
           </h1>
-          <p className="text-xl md:text-2xl text-muted-foreground">
-            Creative Developer & Designer
+          <p className="mt-1 text-xs text-muted-foreground">How's Your Day?</p>
+
+          <p className="mt-4 max-w-[520px] text-xs leading-5 text-muted-foreground">
+            I'm your go-to Product Designer from the wild intersection of creativity
+            and precision. Once an ops brain, now a full-time digital craftsman, I
+            turn "not sure how this will work" ideas into sleek, intuitive, "Oh wow,
+            that's clean!" experiences. Whether I'm designing ops like a stealth-mode
+            UX ninja or planning web-facing teams, I bring strategy, imagination, and
+            a touch of playful chaos to every project.
           </p>
-        </div>
 
-        {/* Bio */}
-        <p 
-          className="text-muted-foreground text-lg max-w-xl mx-auto animate-fade-in"
-          style={{ animationDelay: "0.2s" }}
-        >
-          I craft digital experiences that blend beautiful design with clean code. 
-          Passionate about creating intuitive interfaces and meaningful interactions.
-        </p>
+          <Link
+            to="/contact"
+            className="mt-5 inline-flex items-center rounded-lg border border-border bg-card px-4 py-2 text-xs text-foreground transition-colors hover:bg-secondary"
+          >
+            Contact
+          </Link>
+        </section>
 
-        {/* CTA Buttons */}
-        <div 
-          className="flex flex-wrap items-center justify-center gap-4 animate-fade-in"
-          style={{ animationDelay: "0.3s" }}
-        >
-          <Button asChild className="bg-gradient-to-r from-primary to-accent hover:opacity-90 transition-opacity">
-            <Link to="/projects">
-              View Projects
-              <ArrowRight className="ml-2 w-4 h-4" />
+        {/* Featured Work */}
+        <section>
+          <h2 className="mb-4 text-[15px] font-semibold tracking-tight text-foreground">
+            Work
+          </h2>
+
+          <div className="rounded-[26px] bg-gradient-to-br from-[#6b4bff] via-[#1f67ff] to-[#23d8b9] p-[1px] shadow-[0_18px_60px_rgba(60,40,160,0.22)]">
+            <div className="overflow-hidden rounded-[25px] border border-border/20 bg-card">
+              <div className="relative aspect-[1.55/1] overflow-hidden bg-[radial-gradient(circle_at_top_right,rgba(126,87,255,0.18),transparent_26%),linear-gradient(135deg,#121212_0%,#0a0a0a_100%)]">
+                <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:28px_28px] opacity-30" />
+                <div className="absolute left-3 top-3 flex gap-1.5">
+                  <span className="h-2 w-2 rounded-full bg-foreground/10" />
+                  <span className="h-2 w-2 rounded-full bg-foreground/10" />
+                  <span className="h-2 w-2 rounded-full bg-foreground/10" />
+                </div>
+
+                <div className="absolute inset-y-0 left-0 w-[22%] border-r border-border/30 bg-foreground/[0.02] px-2 py-4 sm:px-3">
+                  <div className="mb-3 h-2 w-9 rounded-full bg-foreground/10" />
+                  <div className="space-y-2">
+                    {[...Array(6)].map((_, index) => (
+                      <div key={index} className="h-2 rounded-full bg-foreground/[0.05]" />
+                    ))}
+                  </div>
+                </div>
+
+                <div className="relative ml-[22%] flex h-full items-center justify-center p-3 sm:p-4">
+                  <div className="grid w-full grid-cols-3 gap-2 sm:gap-3">
+                    {[...Array(9)].map((_, index) => (
+                      <div key={index} className="rounded-xl border border-border/30 bg-foreground/[0.035] p-2">
+                        <div className="mb-2 h-2 rounded-full bg-foreground/10" />
+                        <div className="mb-2 h-1.5 w-2/3 rounded-full bg-foreground/5" />
+                        <div className="h-10 rounded-lg bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.08),transparent_40%)]" />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex items-center justify-between border-t border-border px-4 py-3">
+                <div className="flex items-center gap-2.5">
+                  <div className="flex h-6 w-6 items-center justify-center rounded-md bg-gradient-to-br from-[#7b5cff] to-[#4617a9]">
+                    <svg width="11" height="11" viewBox="0 0 11 11" fill="none">
+                      <path d="M2 8.5L5.5 2.8L9 8.5" stroke="white" strokeWidth="1.35" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </div>
+                  <span className="text-xs font-medium text-foreground">LeapTra AI</span>
+                  <span className="text-[10px] text-muted-foreground/60">|</span>
+                  <span className="text-[10px] text-muted-foreground">2025 - Present</span>
+                </div>
+                <div className="flex items-center gap-1">
+                  <span className="rounded-full bg-secondary px-2.5 py-1 text-[10px] text-muted-foreground">+2</span>
+                  <ArrowUpRight size={14} className="text-muted-foreground/60" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Quick Links */}
+        <section>
+          <div className="grid grid-cols-2 gap-3">
+            <Link
+              to="/projects"
+              className="rounded-2xl border border-border bg-card px-4 py-4 transition-colors hover:border-muted-foreground/20 hover:bg-secondary"
+            >
+              <h3 className="text-xs font-medium text-foreground">Projects</h3>
+              <p className="mt-1 text-[11px] text-muted-foreground">View all work</p>
             </Link>
-          </Button>
-          <Button variant="outline" asChild className="border-border hover:bg-secondary">
-            <Link to="/contact">
-              Get in Touch
+            <Link
+              to="/about"
+              className="rounded-2xl border border-border bg-card px-4 py-4 transition-colors hover:border-muted-foreground/20 hover:bg-secondary"
+            >
+              <h3 className="text-xs font-medium text-foreground">About</h3>
+              <p className="mt-1 text-[11px] text-muted-foreground">My journey</p>
             </Link>
-          </Button>
-        </div>
+            <Link
+              to="/toolstack"
+              className="rounded-2xl border border-border bg-card px-4 py-4 transition-colors hover:border-muted-foreground/20 hover:bg-secondary"
+            >
+              <h3 className="text-xs font-medium text-foreground">Tool Stack</h3>
+              <p className="mt-1 text-[11px] text-muted-foreground">What I use</p>
+            </Link>
+            <Link
+              to="/contact"
+              className="rounded-2xl border border-border bg-card px-4 py-4 transition-colors hover:border-muted-foreground/20 hover:bg-secondary"
+            >
+              <h3 className="text-xs font-medium text-foreground">Contact</h3>
+              <p className="mt-1 text-[11px] text-muted-foreground">Say hello</p>
+            </Link>
+          </div>
+        </section>
 
-        {/* Social Links */}
-        <div 
-          className="flex items-center justify-center gap-4 pt-4 animate-fade-in"
-          style={{ animationDelay: "0.4s" }}
-        >
-          <a 
-            href="#" 
-            className="w-10 h-10 rounded-lg bg-secondary flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-secondary/80 transition-all"
-          >
-            <Github className="w-5 h-5" />
-          </a>
-          <a 
-            href="#" 
-            className="w-10 h-10 rounded-lg bg-secondary flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-secondary/80 transition-all"
-          >
-            <Linkedin className="w-5 h-5" />
-          </a>
-          <a 
-            href="#" 
-            className="w-10 h-10 rounded-lg bg-secondary flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-secondary/80 transition-all"
-          >
-            <Twitter className="w-5 h-5" />
-          </a>
-        </div>
+        {/* Footer */}
+        <footer className="pb-8 pt-4">
+          <div className="flex flex-col items-center gap-5 text-center">
+            <div className="flex items-center gap-4">
+              {["Instagram", "LinkedIn", "Twitter", "YouTube"].map((label) => (
+                <button
+                  key={label}
+                  type="button"
+                  className="text-[11px] text-muted-foreground transition-colors hover:text-foreground"
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
+            <p className="text-[10px] text-muted-foreground/60">Adedamola Ade — Product Designer</p>
+          </div>
+        </footer>
       </div>
     </div>
   );

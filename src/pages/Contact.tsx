@@ -1,155 +1,128 @@
-import { useState } from "react";
-import { Mail, MapPin, Phone, Send, Github, Linkedin, Twitter } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { useToast } from "@/hooks/use-toast";
+import { useState, type FormEvent } from "react";
+
+const testimonials = [
+  {
+    id: 1,
+    text: "Ifeanyi says the design thinking helped shape a platform that's intuitive, modern, and user-friendly. The focus on product growth made a real impact.",
+    name: "Ifeanyi",
+    initials: "IF",
+    accent: "bg-blue-900",
+  },
+  {
+    id: 2,
+    text: "From early concepts to refined user flows, every decision felt thoughtful, clear, and grounded in what users needed.",
+    name: "Henry",
+    initials: "HE",
+    accent: "bg-purple-900",
+  },
+  {
+    id: 3,
+    text: "He's a thoughtful designer and a great teammate. He communicates clearly, helps others, and delivers work with strong visual judgment.",
+    name: "Edith",
+    initials: "ED",
+    accent: "bg-slate-800",
+  },
+];
 
 export default function Contact() {
-  const { toast } = useToast();
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: "",
-  });
+  const [email, setEmail] = useState("");
+  const [submitted, setSubmitted] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    toast({
-      title: "Message sent!",
-      description: "Thanks for reaching out. I'll get back to you soon.",
-    });
-    setFormData({ name: "", email: "", message: "" });
+    if (!email) return;
+    setSubmitted(true);
+    setEmail("");
   };
 
-  const contactInfo = [
-    { icon: Mail, label: "Email", value: "hello@johndoe.com" },
-    { icon: MapPin, label: "Location", value: "San Francisco, CA" },
-    { icon: Phone, label: "Phone", value: "+1 (555) 123-4567" },
-  ];
-
-  const socialLinks = [
-    { icon: Github, label: "GitHub", href: "#" },
-    { icon: Linkedin, label: "LinkedIn", href: "#" },
-    { icon: Twitter, label: "Twitter", href: "#" },
-  ];
-
   return (
-    <div className="min-h-screen px-6 py-12 md:py-20">
-      <div className="max-w-4xl mx-auto space-y-12">
-        {/* Header */}
-        <div className="space-y-4">
-          <h1 className="text-3xl md:text-5xl font-display font-bold">
-            Get in <span className="gradient-text">Touch</span>
-          </h1>
-          <p className="text-muted-foreground text-lg">
-            Have a project in mind or just want to chat? I'd love to hear from you.
-          </p>
-        </div>
-
-        <div className="grid md:grid-cols-2 gap-12">
-          {/* Contact Form */}
-          <div className="space-y-6">
-            <h2 className="text-xl font-display font-semibold">Send a Message</h2>
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div className="space-y-2">
-                <label className="text-sm text-muted-foreground">Name</label>
-                <Input
-                  placeholder="Your name"
-                  value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="bg-secondary border-border focus:border-primary"
-                  required
-                />
-              </div>
-              <div className="space-y-2">
-                <label className="text-sm text-muted-foreground">Email</label>
-                <Input
-                  type="email"
-                  placeholder="your@email.com"
-                  value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className="bg-secondary border-border focus:border-primary"
-                  required
-                />
-              </div>
-              <div className="space-y-2">
-                <label className="text-sm text-muted-foreground">Message</label>
-                <Textarea
-                  placeholder="Tell me about your project..."
-                  rows={5}
-                  value={formData.message}
-                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  className="bg-secondary border-border focus:border-primary resize-none"
-                  required
-                />
-              </div>
-              <Button 
-                type="submit" 
-                className="w-full bg-gradient-to-r from-primary to-accent hover:opacity-90"
+    <div className="min-h-screen px-5 py-10 sm:px-6 sm:py-12">
+      <div className="max-w-[560px] mx-auto space-y-12">
+        {/* Social Validation */}
+        <section>
+          <h2 className="mb-4 text-[15px] font-semibold tracking-tight text-foreground">
+            Social Validation
+          </h2>
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+            {testimonials.map((t) => (
+              <article
+                key={t.id}
+                className="flex flex-col justify-between rounded-[22px] border border-border bg-card p-4 min-h-[165px]"
               >
-                <Send className="w-4 h-4 mr-2" />
-                Send Message
-              </Button>
+                <p className="text-[11px] leading-5 text-muted-foreground">{t.text}</p>
+                <div className="mt-4 flex items-center gap-2.5">
+                  <div className={`flex h-6 w-6 items-center justify-center rounded-full ${t.accent}`}>
+                    <span className="text-[9px] font-semibold text-foreground">{t.initials}</span>
+                  </div>
+                  <span className="text-[11px] text-muted-foreground">{t.name}</span>
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        {/* Newsletter / Contact */}
+        <section>
+          <h2 className="mb-1 text-[15px] font-semibold tracking-tight text-foreground">
+            Newsletter
+          </h2>
+          <p className="mb-5 max-w-[500px] text-[11px] leading-5 text-muted-foreground">
+            I document my learnings once a month. I would love to share them with you over mail.
+            <br />
+            No bs*t. No spam. Straight up value.
+          </p>
+
+          {submitted ? (
+            <div className="rounded-2xl border border-border bg-card px-5 py-4">
+              <p className="text-sm font-medium text-foreground">You're in!</p>
+              <p className="mt-1 text-[11px] text-muted-foreground">Thanks for subscribing. Talk soon.</p>
+            </div>
+          ) : (
+            <form onSubmit={handleSubmit} className="flex max-w-[370px] gap-2">
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="name@gmail.com"
+                required
+                className="h-11 flex-1 rounded-xl border border-border bg-card px-4 text-xs text-foreground outline-none placeholder:text-muted-foreground/50 focus:border-muted-foreground/40"
+              />
+              <button
+                type="submit"
+                className="h-11 rounded-xl bg-foreground px-4 text-xs font-medium text-background transition-colors hover:bg-foreground/90"
+              >
+                Subscribe
+              </button>
             </form>
-          </div>
+          )}
+        </section>
 
-          {/* Contact Info */}
-          <div className="space-y-8">
-            <div className="space-y-6">
-              <h2 className="text-xl font-display font-semibold">Contact Info</h2>
-              <div className="space-y-4">
-                {contactInfo.map((info) => {
-                  const Icon = info.icon;
-                  return (
-                    <div 
-                      key={info.label}
-                      className="flex items-center gap-4 p-4 rounded-xl bg-card border border-border"
-                    >
-                      <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center">
-                        <Icon className="w-5 h-5 text-primary" />
-                      </div>
-                      <div>
-                        <p className="text-sm text-muted-foreground">{info.label}</p>
-                        <p className="font-medium">{info.value}</p>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
+        {/* Footer */}
+        <footer className="pb-8 pt-4">
+          <div className="flex flex-col items-center gap-5 text-center">
+            <div className="flex items-center gap-4">
+              {["Instagram", "LinkedIn", "Twitter", "YouTube"].map((label) => (
+                <button
+                  key={label}
+                  type="button"
+                  className="text-[11px] text-muted-foreground transition-colors hover:text-foreground"
+                >
+                  {label}
+                </button>
+              ))}
             </div>
-
-            {/* Social Links */}
-            <div className="space-y-4">
-              <h2 className="text-xl font-display font-semibold">Follow Me</h2>
-              <div className="flex gap-3">
-                {socialLinks.map((social) => {
-                  const Icon = social.icon;
-                  return (
-                    <a
-                      key={social.label}
-                      href={social.href}
-                      className="w-12 h-12 rounded-xl bg-secondary flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-primary/20 transition-all"
-                    >
-                      <Icon className="w-5 h-5" />
-                    </a>
-                  );
-                })}
+            <div className="flex flex-col items-center gap-3">
+              <div className="flex h-14 w-14 items-center justify-center rounded-full border border-border bg-card text-foreground/70">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path d="M4 17.5C4 13.358 7.13401 10 11 10H15C16.933 10 18.5 11.567 18.5 13.5C18.5 15.433 16.933 17 15 17H10.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                  <path d="M9 21L4 17.5L9 14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
               </div>
-            </div>
-
-            {/* Availability */}
-            <div className="rounded-xl bg-gradient-to-br from-primary/10 to-accent/10 p-6 border border-primary/20">
-              <div className="flex items-center gap-2 mb-2">
-                <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                <span className="text-sm font-medium">Available for freelance</span>
-              </div>
-              <p className="text-muted-foreground text-sm">
-                Currently taking on new projects. Let's build something amazing together!
-              </p>
+              <p className="text-[11px] text-muted-foreground">Thanks for visiting</p>
+              <p className="text-[10px] text-muted-foreground/60">Adedamola Ade — Product Designer</p>
             </div>
           </div>
-        </div>
+        </footer>
       </div>
     </div>
   );
