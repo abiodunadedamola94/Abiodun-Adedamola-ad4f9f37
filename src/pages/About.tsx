@@ -1,108 +1,112 @@
-import { MapPin, Calendar, Briefcase } from "lucide-react";
-
 export default function About() {
-  const skills = [
-    "React", "TypeScript", "Node.js", "Figma", "Tailwind CSS", 
-    "Next.js", "GraphQL", "Python", "UI/UX Design", "Motion Design"
+  const journey = [
+    {
+      title: "Foundations in Operations & Systems Thinking",
+      period: "2018 - 2021",
+      description:
+        "I started my career in operations, where my go-to wasn't just to 'get things done,' but to make sure things worked consistently, efficiently, and at scale. I soon found myself fine-tuning service workflows, monitoring trends and processes, and asking one burning question: why does it feel hard to fix this — could that period trained me to think in systems.",
+    },
+    {
+      title: "Transition into Product Design",
+      period: "2021 - 2023",
+      description:
+        "My curiosity about how systems relate naturally pulled me into product design. I started to shape experiences, not just react to them. I began learning UI/UX, product thinking, and user-centered design — connecting operational pain points to real digital solutions.",
+    },
+    {
+      title: "Building Real Products, Not Just Screens",
+      period: "2023",
+      description:
+        "I evolved as a product designer, this time focused on real-world impact. I went beyond creating user-centered products that aligned with key expectations and business needs. My contributions include designing comprehensive UX and usable, interactive flows.",
+    },
+    {
+      title: "Innovating and Leading",
+      period: "2024 - 2025",
+      description:
+        "I collaborate with multidisciplinary teams to design AI-powered products and web experiences. My recent solutions include designing LearTra AI, a workflow automation concept, contributing to Learning platforms, and designing the service and web for a vehicle car-tech product.",
+    },
+    {
+      title: "Continuous Evolution",
+      period: "2025",
+      description:
+        "Today, I continue to grow as a professional designer, embracing new challenges and exploring advanced design systems and AI-driven products. My commitment to creating meaningful, user-centered design remains at the core of my creative journey towards the future of design.",
+    },
   ];
 
   return (
-    <div className="min-h-screen px-6 py-12 md:py-20">
-      <div className="max-w-4xl mx-auto space-y-12">
+    <div className="min-h-screen px-5 py-10 sm:px-6 sm:py-12">
+      <div className="max-w-[560px] mx-auto space-y-10">
         {/* Header */}
-        <div className="space-y-4">
-          <h1 className="text-3xl md:text-5xl font-display font-bold">
-            About <span className="gradient-text">Me</span>
+        <section>
+          <h1 className="text-xl font-semibold tracking-tight text-foreground">
+            Hi 👋 I'm Adedamola and I like building my ideas.
           </h1>
-          <p className="text-muted-foreground text-lg">
-            Get to know the person behind the code
+          <p className="mt-2 text-xs text-muted-foreground">Currently at LeapTra</p>
+        </section>
+
+        {/* Photo Grid Placeholder */}
+        <section>
+          <div className="rounded-2xl overflow-hidden border border-border bg-card aspect-[16/9] flex items-center justify-center">
+            <span className="text-muted-foreground/30 text-sm">Photo placeholder</span>
+          </div>
+          <div className="grid grid-cols-3 gap-3 mt-3">
+            {[1, 2, 3].map((i) => (
+              <div key={i} className="rounded-xl overflow-hidden border border-border bg-card aspect-square flex items-center justify-center">
+                <span className="text-muted-foreground/30 text-[10px]">Photo {i}</span>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* My Journey */}
+        <section>
+          <h2 className="mb-2 text-[15px] font-semibold tracking-tight text-foreground">
+            My Journey
+          </h2>
+          <p className="mb-8 text-xs leading-5 text-muted-foreground">
+            This is a glimpse into my path — from working behind the scenes in operations to
+            designing products, systems, and AI-powered experiences used by real businesses.
+            It's a story of curiosity, problem-solving, and continuous evolution.
           </p>
-        </div>
 
-        {/* Profile Section */}
-        <div className="grid md:grid-cols-3 gap-8">
-          {/* Photo */}
-          <div className="md:col-span-1">
-            <div className="aspect-square rounded-2xl bg-gradient-to-br from-primary/20 to-accent/20 p-1">
-              <div className="w-full h-full rounded-2xl bg-card flex items-center justify-center">
-                <span className="text-6xl font-display font-bold gradient-text">JD</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Info */}
-          <div className="md:col-span-2 space-y-6">
-            <div className="flex flex-wrap gap-4">
-              <div className="flex items-center gap-2 text-muted-foreground">
-                <MapPin className="w-4 h-4" />
-                <span>San Francisco, CA</span>
-              </div>
-              <div className="flex items-center gap-2 text-muted-foreground">
-                <Briefcase className="w-4 h-4" />
-                <span>5+ years experience</span>
-              </div>
-              <div className="flex items-center gap-2 text-muted-foreground">
-                <Calendar className="w-4 h-4" />
-                <span>Available for freelance</span>
-              </div>
-            </div>
-
-            <div className="space-y-4">
-              <h2 className="text-xl font-display font-semibold">My Story</h2>
-              <p className="text-muted-foreground leading-relaxed">
-                I'm a passionate developer and designer with over 5 years of experience 
-                creating digital products. My journey began with a curiosity for how things 
-                work on the web, which evolved into a deep love for crafting user experiences.
-              </p>
-              <p className="text-muted-foreground leading-relaxed">
-                I believe great design is invisible—it just works. My approach combines 
-                technical expertise with creative thinking to build solutions that are both 
-                beautiful and functional.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        {/* Skills */}
-        <div className="space-y-6">
-          <h2 className="text-xl font-display font-semibold">Skills & Technologies</h2>
-          <div className="flex flex-wrap gap-3">
-            {skills.map((skill) => (
-              <span 
-                key={skill}
-                className="px-4 py-2 rounded-full bg-secondary text-sm font-medium text-foreground hover:bg-primary/20 transition-colors cursor-default"
-              >
-                {skill}
-              </span>
-            ))}
-          </div>
-        </div>
-
-        {/* Experience Timeline */}
-        <div className="space-y-6">
-          <h2 className="text-xl font-display font-semibold">Experience</h2>
-          <div className="space-y-6">
-            {[
-              { role: "Senior Developer", company: "Tech Corp", period: "2022 - Present" },
-              { role: "Full Stack Developer", company: "StartupXYZ", period: "2020 - 2022" },
-              { role: "Frontend Developer", company: "Digital Agency", period: "2018 - 2020" },
-            ].map((exp, index) => (
-              <div 
-                key={index}
-                className="flex gap-4 p-4 rounded-xl bg-card border border-border hover:border-primary/30 transition-colors"
-              >
-                <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center flex-shrink-0">
-                  <Briefcase className="w-5 h-5 text-primary" />
+          <div className="space-y-10">
+            {journey.map((item) => (
+              <div key={item.title}>
+                <h3 className="text-[13px] font-semibold text-foreground">{item.title}</h3>
+                <p className="mt-0.5 text-[10px] text-[#7b5cff]">{item.period}</p>
+                
+                {/* Image placeholders */}
+                <div className="grid grid-cols-2 gap-3 mt-3 mb-3">
+                  <div className="rounded-xl border border-border bg-card aspect-[4/3] flex items-center justify-center">
+                    <span className="text-muted-foreground/20 text-[10px]">Image</span>
+                  </div>
+                  <div className="rounded-xl border border-border bg-card aspect-[4/3] flex items-center justify-center">
+                    <span className="text-muted-foreground/20 text-[10px]">Image</span>
+                  </div>
                 </div>
-                <div>
-                  <h3 className="font-semibold">{exp.role}</h3>
-                  <p className="text-muted-foreground text-sm">{exp.company}</p>
-                  <p className="text-muted-foreground text-xs mt-1">{exp.period}</p>
-                </div>
+
+                <p className="text-[11px] leading-5 text-muted-foreground">{item.description}</p>
               </div>
             ))}
           </div>
-        </div>
+        </section>
+
+        {/* Footer */}
+        <footer className="pb-8 pt-4">
+          <div className="flex flex-col items-center gap-5 text-center">
+            <div className="flex items-center gap-4">
+              {["Instagram", "LinkedIn", "Twitter", "YouTube"].map((label) => (
+                <button
+                  key={label}
+                  type="button"
+                  className="text-[11px] text-muted-foreground transition-colors hover:text-foreground"
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
+            <p className="text-[10px] text-muted-foreground/60">Adedamola Ade — Product Designer</p>
+          </div>
+        </footer>
       </div>
     </div>
   );
