@@ -74,7 +74,7 @@ export default function About() {
               <img src={aboutGrid1} alt="ADE branded portrait" className="w-full h-full object-cover" loading="lazy" width={512} height={512} />
             </div>
             <div className="rounded-xl overflow-hidden border border-border bg-card aspect-square">
-              <img src={aboutGrid3} alt="Casual street style" className="w-full h-full object-cover" loading="lazy" width={512} height={512} />
+              <img src={aboutGrid3} alt="Casual street style" className="w-full h-full object-cover object-top" loading="lazy" width={512} height={512} />
             </div>
           </div>
         </section>
