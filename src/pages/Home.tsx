@@ -1,5 +1,6 @@
 import { ArrowUpRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import workLeaptra from "@/assets/work-leaptra.png";
 
 export default function Home() {
   return (
@@ -54,35 +55,16 @@ export default function Home() {
 
           <div className="rounded-[26px] bg-gradient-to-br from-[#6b4bff] via-[#1f67ff] to-[#23d8b9] p-[1px] shadow-[0_18px_60px_rgba(60,40,160,0.22)]">
             <div className="overflow-hidden rounded-[25px] border border-border/20 bg-card">
-              <div className="relative aspect-[1.55/1] overflow-hidden bg-[radial-gradient(circle_at_top_right,rgba(126,87,255,0.18),transparent_26%),linear-gradient(135deg,#121212_0%,#0a0a0a_100%)]">
-                <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:28px_28px] opacity-30" />
-                <div className="absolute left-3 top-3 flex gap-1.5">
-                  <span className="h-2 w-2 rounded-full bg-foreground/10" />
-                  <span className="h-2 w-2 rounded-full bg-foreground/10" />
-                  <span className="h-2 w-2 rounded-full bg-foreground/10" />
+              <Link to="/projects/leaptra" className="block">
+                <div className="relative aspect-[1.55/1] overflow-hidden bg-[linear-gradient(135deg,#121212_0%,#0a0a0a_100%)]">
+                  <img
+                    src={workLeaptra}
+                    alt="LeapTra AI work section"
+                    className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 hover:scale-[1.02]"
+                    loading="lazy"
+                  />
                 </div>
-
-                <div className="absolute inset-y-0 left-0 w-[22%] border-r border-border/30 bg-foreground/[0.02] px-2 py-4 sm:px-3">
-                  <div className="mb-3 h-2 w-9 rounded-full bg-foreground/10" />
-                  <div className="space-y-2">
-                    {[...Array(6)].map((_, index) => (
-                      <div key={index} className="h-2 rounded-full bg-foreground/[0.05]" />
-                    ))}
-                  </div>
-                </div>
-
-                <div className="relative ml-[22%] flex h-full items-center justify-center p-3 sm:p-4">
-                  <div className="grid w-full grid-cols-3 gap-2 sm:gap-3">
-                    {[...Array(9)].map((_, index) => (
-                      <div key={index} className="rounded-xl border border-border/30 bg-foreground/[0.035] p-2">
-                        <div className="mb-2 h-2 rounded-full bg-foreground/10" />
-                        <div className="mb-2 h-1.5 w-2/3 rounded-full bg-foreground/5" />
-                        <div className="h-10 rounded-lg bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.08),transparent_40%)]" />
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
+              </Link>
 
               <div className="flex items-center justify-between border-t border-border px-4 py-3">
                 <div className="flex items-center gap-2.5">
