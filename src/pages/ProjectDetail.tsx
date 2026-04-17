@@ -1,5 +1,5 @@
 import { Link, useParams } from "react-router-dom";
-import { ArrowLeft, ArrowUpRight } from "lucide-react";
+import { ArrowLeft, ArrowUpRight, ExternalLink } from "lucide-react";
 import { getProject } from "@/data/projects";
 
 export default function ProjectDetail() {
@@ -48,6 +48,32 @@ export default function ProjectDetail() {
           </div>
           <h1 className="mt-3 text-xl font-semibold tracking-tight text-foreground">{project.name}</h1>
           <p className="mt-1.5 text-xs leading-5 text-muted-foreground">{project.tagline}</p>
+
+          {/* Live links */}
+          {(project.liveUrl || project.secondaryUrl) && (
+            <div className="mt-4 flex flex-wrap gap-2">
+              {project.liveUrl && (
+                <a
+                  href={project.liveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`inline-flex items-center gap-1.5 rounded-full bg-gradient-to-br ${project.accentClass} px-3 py-1.5 text-[11px] font-medium text-white transition-opacity hover:opacity-90`}
+                >
+                  <ExternalLink size={11} /> {project.liveLabel ?? "Visit live site"}
+                </a>
+              )}
+              {project.secondaryUrl && (
+                <a
+                  href={project.secondaryUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-3 py-1.5 text-[11px] font-medium text-foreground transition-colors hover:bg-secondary"
+                >
+                  <ExternalLink size={11} /> {project.secondaryLabel ?? "Secondary site"}
+                </a>
+              )}
+            </div>
+          )}
         </header>
 
         {/* Hero visual */}
@@ -87,6 +113,59 @@ export default function ProjectDetail() {
           <div>
             <h2 className="text-[13px] font-semibold text-foreground">The Solution</h2>
             <p className="mt-2 text-[11px] leading-5 text-muted-foreground">{project.solution}</p>
+          </div>
+        </section>
+
+        {/* Design Thinking */}
+        <section>
+          <h2 className="text-[13px] font-semibold text-foreground">Design Thinking</h2>
+          <p className="mt-2 text-[11px] leading-5 text-muted-foreground">{project.designThinking}</p>
+        </section>
+
+        {/* Website Overview */}
+        <section>
+          <h2 className="text-[13px] font-semibold text-foreground">Website Overview</h2>
+          <ul className="mt-3 space-y-2">
+            {project.websiteOverview.map((line) => (
+              <li key={line} className="flex items-start gap-2 text-[11px] leading-5 text-muted-foreground">
+                <span className={`mt-1.5 h-1 w-1 flex-shrink-0 rounded-full bg-gradient-to-br ${project.accentClass}`} />
+                {line}
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        {/* Typography */}
+        <section>
+          <h2 className="text-[13px] font-semibold text-foreground">Typography</h2>
+          <div className="mt-3 space-y-2">
+            {project.typography.map((t) => (
+              <div key={t.family} className="rounded-xl border border-border bg-card p-3">
+                <div className="flex items-baseline justify-between gap-2">
+                  <p className="text-[14px] font-medium text-foreground">{t.family}</p>
+                  <p className="text-[10px] text-muted-foreground/70">{t.weights}</p>
+                </div>
+                <p className="mt-1 text-[11px] leading-5 text-muted-foreground">{t.usage}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Color Palette */}
+        <section>
+          <h2 className="text-[13px] font-semibold text-foreground">Color Palette</h2>
+          <div className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-3">
+            {project.colorPalette.map((c) => (
+              <div key={c.hex} className="rounded-xl border border-border bg-card p-2.5">
+                <div
+                  className="h-12 w-full rounded-md border border-border/50"
+                  style={{ backgroundColor: c.hex }}
+                />
+                <p className="mt-2 text-[11px] font-medium text-foreground">{c.name}</p>
+                <p className="text-[10px] uppercase tracking-[0.06em] text-muted-foreground/70">{c.hex}</p>
+                <p className="mt-1 text-[10px] leading-4 text-muted-foreground">{c.usage}</p>
+              </div>
+            ))}
           </div>
         </section>
 
@@ -130,6 +209,32 @@ export default function ProjectDetail() {
             ))}
           </div>
         </section>
+
+        {/* Visit live (footer CTA) */}
+        {project.liveUrl && (
+          <section className={`rounded-2xl border border-border bg-gradient-to-br ${project.accentClass} p-5`}>
+            <p className="text-[10px] uppercase tracking-[0.14em] text-white/80">Proof of work</p>
+            <p className="mt-1 text-[13px] font-semibold text-white">See {project.name} live</p>
+            <a
+              href={project.liveUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-white/15 px-3 py-1.5 text-[11px] font-medium text-white backdrop-blur transition-colors hover:bg-white/25"
+            >
+              <ExternalLink size={11} /> {project.liveLabel ?? project.liveUrl}
+            </a>
+            {project.secondaryUrl && (
+              <a
+                href={project.secondaryUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="ml-2 mt-3 inline-flex items-center gap-1.5 rounded-full bg-white/15 px-3 py-1.5 text-[11px] font-medium text-white backdrop-blur transition-colors hover:bg-white/25"
+              >
+                <ExternalLink size={11} /> {project.secondaryLabel}
+              </a>
+            )}
+          </section>
+        )}
 
         {/* Footer nav */}
         <footer className="flex items-center justify-between border-t border-border pt-6">
