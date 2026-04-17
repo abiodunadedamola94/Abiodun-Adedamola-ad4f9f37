@@ -1,4 +1,7 @@
 import { ReactNode } from "react";
+import jomppaLogo from "@/assets/jomppa-logo.avif";
+import dealmateMockup from "@/assets/dealmate-mockup.jpg";
+import leaptraWork from "@/assets/work-leaptra.png";
 
 export type ColorSwatch = { name: string; hex: string; usage: string };
 export type TypographyEntry = { family: string; usage: string; weights: string };
@@ -13,6 +16,7 @@ export type ProjectCaseStudy = {
   industry: string;
   duration: string;
   platform: string;
+  heroImage?: string;
   liveUrl?: string;
   liveLabel?: string;
   secondaryUrl?: string;
@@ -47,6 +51,7 @@ export const projects: ProjectCaseStudy[] = [
     industry: "AI & Automation",
     duration: "10 weeks",
     platform: "Web App + Marketing Site",
+    heroImage: leaptraWork,
     liveUrl: "https://leaptra.com",
     liveLabel: "leaptra.com",
     secondaryUrl: "https://leaptra.ai",
@@ -115,7 +120,9 @@ export const projects: ProjectCaseStudy[] = [
     description:
       "A seamless on-demand handyman platform connecting homeowners with trusted local service providers through an intuitive and frictionless booking experience.",
     icon: (
-      <Icon className="border border-border bg-card text-[9px] font-bold text-blue-400">Z</Icon>
+      <div className="flex h-7 w-7 items-center justify-center overflow-hidden rounded-md border border-border bg-card">
+        <img src={jomppaLogo} alt="Jomppa logo" className="h-full w-full object-contain" />
+      </div>
     ),
     accentClass: "from-blue-500 to-indigo-600",
     overview:
@@ -273,6 +280,7 @@ export const projects: ProjectCaseStudy[] = [
     industry: "Fintech / Escrow",
     duration: "12 weeks",
     platform: "Web + Mobile",
+    heroImage: dealmateMockup,
     description:
       "A secure and transparent escrow system designed to protect both buyers and sellers in high-value transactions with a clear, trustworthy interface.",
     icon: (
