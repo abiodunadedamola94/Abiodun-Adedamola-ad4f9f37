@@ -1,7 +1,7 @@
 import aboutHero from "@/assets/about-hero.webp";
 import aboutGrid1 from "@/assets/about-grid-1.jpg";
 import aboutGrid3 from "@/assets/about-grid-3.jpg";
-import portrait from "@/assets/adedamola-portrait.jpg";
+import portrait from "@/assets/profile-avatar.jpg";
 import journeyOps1 from "@/assets/journey-ops-1.jpg";
 import journeyOps2 from "@/assets/journey-ops-2.jpg";
 import journeyDesign1 from "@/assets/journey-design-1.jpg";
@@ -67,8 +67,15 @@ export default function About() {
             <img src={aboutHero} alt="Adedamola speaking at a tech conference" className="w-full h-full object-cover" width={960} height={540} />
           </div>
           <div className="grid grid-cols-3 gap-3 mt-3">
-            <div className="rounded-xl overflow-hidden border border-border bg-card aspect-square">
-              <img src={portrait} alt="Adedamola portrait" className="w-full h-full object-cover" loading="lazy" width={512} height={512} />
+            <div className="group rounded-xl overflow-hidden border border-border bg-card aspect-square">
+              <img
+                src={portrait}
+                alt="Adedamola portrait"
+                className="w-full h-full object-cover transition-all duration-500 group-hover:grayscale"
+                loading="lazy"
+                width={512}
+                height={512}
+              />
             </div>
             <div className="rounded-xl overflow-hidden border border-border bg-card aspect-square">
               <img src={aboutGrid1} alt="ADE branded portrait" className="w-full h-full object-cover" loading="lazy" width={512} height={512} />

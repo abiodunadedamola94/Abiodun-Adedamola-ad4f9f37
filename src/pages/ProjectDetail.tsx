@@ -77,16 +77,27 @@ export default function ProjectDetail() {
         </header>
 
         {/* Hero visual */}
-        <div className={`relative overflow-hidden rounded-2xl border border-border aspect-[16/9] bg-gradient-to-br ${project.accentClass}`}>
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.18),transparent_60%)]" />
-          <div className="absolute bottom-4 left-4 right-4 flex items-end justify-between">
-            <div className="text-white/90">
-              <p className="text-[10px] uppercase tracking-[0.14em] opacity-80">Case Study</p>
-              <p className="mt-0.5 text-sm font-semibold">{project.name}</p>
-            </div>
-            <span className="text-[10px] text-white/70">{project.year}</span>
+        {project.heroImage ? (
+          <div className="relative overflow-hidden rounded-2xl border border-border aspect-[16/9] bg-card">
+            <img
+              src={project.heroImage}
+              alt={`${project.name} hero`}
+              className="h-full w-full object-cover"
+              loading="lazy"
+            />
           </div>
-        </div>
+        ) : (
+          <div className={`relative overflow-hidden rounded-2xl border border-border aspect-[16/9] bg-gradient-to-br ${project.accentClass}`}>
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.18),transparent_60%)]" />
+            <div className="absolute bottom-4 left-4 right-4 flex items-end justify-between">
+              <div className="text-white/90">
+                <p className="text-[10px] uppercase tracking-[0.14em] opacity-80">Case Study</p>
+                <p className="mt-0.5 text-sm font-semibold">{project.name}</p>
+              </div>
+              <span className="text-[10px] text-white/70">{project.year}</span>
+            </div>
+          </div>
+        )}
 
         {/* Meta */}
         <section className="grid grid-cols-2 gap-x-4 gap-y-3 sm:grid-cols-3">
