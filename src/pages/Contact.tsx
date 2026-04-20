@@ -194,12 +194,13 @@ export default function Contact() {
 
                 <button
                   type="submit"
-                  className="w-full h-12 rounded-xl font-medium text-sm text-foreground transition-all"
+                  disabled={submitting}
+                  className="w-full h-12 rounded-xl font-medium text-sm text-foreground transition-all disabled:opacity-60 disabled:cursor-not-allowed"
                   style={{
                     background: "linear-gradient(90deg, hsl(30 80% 65%), hsl(340 60% 65%), hsl(260 70% 65%))",
                   }}
                 >
-                  Submit
+                  {submitting ? "Sending..." : "Submit"}
                 </button>
               </form>
             </div>
