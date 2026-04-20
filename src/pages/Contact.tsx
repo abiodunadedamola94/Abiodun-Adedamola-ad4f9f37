@@ -1,4 +1,13 @@
 import { useState, useRef, type FormEvent } from "react";
+import { z } from "zod";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
+
+const contactSchema = z.object({
+  fullName: z.string().trim().min(1, "Name is required").max(100),
+  email: z.string().trim().email("Invalid email").max(255),
+  message: z.string().trim().min(1, "Message is required").max(5000),
+});
 
 const testimonials = [
   {
@@ -43,15 +52,56 @@ export default function Contact() {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!fullName || !email || !message) return;
-    setSubmitted(true);
-    setFullName("");
-    setEmail("");
-    setMessage("");
+    if (submitting) return;
+
+    const parsed = contactSchema.safeParse({ fullName, email, message });
+    if (!parsed.success) {
+      toast.error(parsed.error.errors[0]?.message ?? "Please check your inputs");
+      return;
+    }
+
+    setSubmitting(true);
+    try {
+      const { data: inserted, error } = await supabase
+        .from("contact_messages")
+        .insert({
+          full_name: parsed.data.fullName,
+          email: parsed.data.email,
+          message: parsed.data.message,
+        })
+        .select("id")
+        .single();
+
+      if (error) {
+        console.error("[contact] insert failed", error);
+        toast.error("Could not send your message. Please try again.");
+        return;
+      }
+
+      // Fire notification email (don't block UX on it)
+      supabase.functions
+        .invoke("notify-contact", {
+          body: {
+            id: inserted?.id,
+            fullName: parsed.data.fullName,
+            email: parsed.data.email,
+            message: parsed.data.message,
+          },
+        })
+        .catch((err) => console.warn("[contact] notify failed", err));
+
+      setSubmitted(true);
+      setFullName("");
+      setEmail("");
+      setMessage("");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -144,12 +194,13 @@ export default function Contact() {
 
                 <button
                   type="submit"
-                  className="w-full h-12 rounded-xl font-medium text-sm text-foreground transition-all"
+                  disabled={submitting}
+                  className="w-full h-12 rounded-xl font-medium text-sm text-foreground transition-all disabled:opacity-60 disabled:cursor-not-allowed"
                   style={{
                     background: "linear-gradient(90deg, hsl(30 80% 65%), hsl(340 60% 65%), hsl(260 70% 65%))",
                   }}
                 >
-                  Submit
+                  {submitting ? "Sending..." : "Submit"}
                 </button>
               </form>
             </div>
