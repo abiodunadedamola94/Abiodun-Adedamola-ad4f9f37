@@ -92,7 +92,33 @@ export default function ProjectDetail() {
         </header>
 
         {/* Hero visual */}
-        {project.heroImage ? (
+        {project.heroVideo ? (
+          <div className="relative overflow-hidden rounded-2xl border border-border aspect-[16/9] bg-card group">
+            <video
+              ref={videoRef}
+              src={project.heroVideo}
+              className="h-full w-full object-cover"
+              playsInline
+              preload="metadata"
+              onPlay={() => setIsPlaying(true)}
+              onPause={() => setIsPlaying(false)}
+              onEnded={() => setIsPlaying(false)}
+              onClick={togglePlay}
+            />
+            <button
+              type="button"
+              onClick={togglePlay}
+              aria-label={isPlaying ? "Pause video" : "Play video"}
+              className={`absolute inset-0 flex items-center justify-center transition-opacity duration-300 ${
+                isPlaying ? "opacity-0 group-hover:opacity-100" : "opacity-100"
+              }`}
+            >
+              <span className="flex h-14 w-14 items-center justify-center rounded-full bg-black/55 text-white backdrop-blur-md ring-1 ring-white/20 transition-transform hover:scale-105 active:scale-95">
+                {isPlaying ? <Pause size={22} fill="currentColor" /> : <Play size={22} fill="currentColor" className="ml-0.5" />}
+              </span>
+            </button>
+          </div>
+        ) : project.heroImage ? (
           <div className="relative overflow-hidden rounded-2xl border border-border aspect-[16/9] bg-card">
             <img
               src={project.heroImage}
