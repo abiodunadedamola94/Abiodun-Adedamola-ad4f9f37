@@ -1,5 +1,6 @@
+import { useRef, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { ArrowLeft, ArrowUpRight, ExternalLink } from "lucide-react";
+import { ArrowLeft, ArrowUpRight, ExternalLink, Pause, Play } from "lucide-react";
 import { getProject } from "@/data/projects";
 
 export default function ProjectDetail() {
