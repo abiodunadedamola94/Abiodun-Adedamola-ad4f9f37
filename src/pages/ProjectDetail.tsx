@@ -1,10 +1,25 @@
+import { useRef, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { ArrowLeft, ArrowUpRight, ExternalLink } from "lucide-react";
+import { ArrowLeft, ArrowUpRight, ExternalLink, Pause, Play } from "lucide-react";
 import { getProject } from "@/data/projects";
 
 export default function ProjectDetail() {
   const { id } = useParams<{ id: string }>();
   const project = id ? getProject(id) : undefined;
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  const togglePlay = () => {
+    const v = videoRef.current;
+    if (!v) return;
+    if (v.paused) {
+      v.play();
+      setIsPlaying(true);
+    } else {
+      v.pause();
+      setIsPlaying(false);
+    }
+  };
 
   if (!project) {
     return (
@@ -77,7 +92,33 @@ export default function ProjectDetail() {
         </header>
 
         {/* Hero visual */}
-        {project.heroImage ? (
+        {project.heroVideo ? (
+          <div className="relative overflow-hidden rounded-2xl border border-border aspect-[16/9] bg-card group">
+            <video
+              ref={videoRef}
+              src={project.heroVideo}
+              className="h-full w-full object-cover"
+              playsInline
+              preload="metadata"
+              onPlay={() => setIsPlaying(true)}
+              onPause={() => setIsPlaying(false)}
+              onEnded={() => setIsPlaying(false)}
+              onClick={togglePlay}
+            />
+            <button
+              type="button"
+              onClick={togglePlay}
+              aria-label={isPlaying ? "Pause video" : "Play video"}
+              className={`absolute inset-0 flex items-center justify-center transition-opacity duration-300 ${
+                isPlaying ? "opacity-0 group-hover:opacity-100" : "opacity-100"
+              }`}
+            >
+              <span className="flex h-14 w-14 items-center justify-center rounded-full bg-black/55 text-white backdrop-blur-md ring-1 ring-white/20 transition-transform hover:scale-105 active:scale-95">
+                {isPlaying ? <Pause size={22} fill="currentColor" /> : <Play size={22} fill="currentColor" className="ml-0.5" />}
+              </span>
+            </button>
+          </div>
+        ) : project.heroImage ? (
           <div className="relative overflow-hidden rounded-2xl border border-border aspect-[16/9] bg-card">
             <img
               src={project.heroImage}
@@ -223,28 +264,65 @@ export default function ProjectDetail() {
 
         {/* Visit live (footer CTA) */}
         {project.liveUrl && (
-          <section className={`rounded-2xl border border-border bg-gradient-to-br ${project.accentClass} p-5`}>
-            <p className="text-[10px] uppercase tracking-[0.14em] text-white/80">Proof of work</p>
-            <p className="mt-1 text-[13px] font-semibold text-white">See {project.name} live</p>
-            <a
-              href={project.liveUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-white/15 px-3 py-1.5 text-[11px] font-medium text-white backdrop-blur transition-colors hover:bg-white/25"
-            >
-              <ExternalLink size={11} /> {project.liveLabel ?? project.liveUrl}
-            </a>
-            {project.secondaryUrl && (
+          project.proofImage ? (
+            <section className="overflow-hidden rounded-2xl border border-border bg-black">
+              <div className="relative aspect-[1920/600] w-full">
+                <img
+                  src={project.proofImage}
+                  alt={`${project.name} proof of work banner`}
+                  className="h-full w-full object-cover"
+                  loading="lazy"
+                />
+              </div>
+              <div className="p-5">
+                <p className="text-[10px] uppercase tracking-[0.14em] text-muted-foreground">Proof of work</p>
+                <p className="mt-1 text-[13px] font-semibold text-foreground">See {project.name} live</p>
+                <div className="mt-3 flex flex-wrap gap-2">
+                  <a
+                    href={project.liveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`inline-flex items-center gap-1.5 rounded-full bg-gradient-to-br ${project.accentClass} px-3 py-1.5 text-[11px] font-medium text-white transition-opacity hover:opacity-90`}
+                  >
+                    <ExternalLink size={11} /> {project.liveLabel ?? project.liveUrl}
+                  </a>
+                  {project.secondaryUrl && (
+                    <a
+                      href={project.secondaryUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-3 py-1.5 text-[11px] font-medium text-foreground transition-colors hover:bg-secondary"
+                    >
+                      <ExternalLink size={11} /> {project.secondaryLabel}
+                    </a>
+                  )}
+                </div>
+              </div>
+            </section>
+          ) : (
+            <section className={`rounded-2xl border border-border bg-gradient-to-br ${project.accentClass} p-5`}>
+              <p className="text-[10px] uppercase tracking-[0.14em] text-white/80">Proof of work</p>
+              <p className="mt-1 text-[13px] font-semibold text-white">See {project.name} live</p>
               <a
-                href={project.secondaryUrl}
+                href={project.liveUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="ml-2 mt-3 inline-flex items-center gap-1.5 rounded-full bg-white/15 px-3 py-1.5 text-[11px] font-medium text-white backdrop-blur transition-colors hover:bg-white/25"
+                className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-white/15 px-3 py-1.5 text-[11px] font-medium text-white backdrop-blur transition-colors hover:bg-white/25"
               >
-                <ExternalLink size={11} /> {project.secondaryLabel}
+                <ExternalLink size={11} /> {project.liveLabel ?? project.liveUrl}
               </a>
-            )}
-          </section>
+              {project.secondaryUrl && (
+                <a
+                  href={project.secondaryUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="ml-2 mt-3 inline-flex items-center gap-1.5 rounded-full bg-white/15 px-3 py-1.5 text-[11px] font-medium text-white backdrop-blur transition-colors hover:bg-white/25"
+                >
+                  <ExternalLink size={11} /> {project.secondaryLabel}
+                </a>
+              )}
+            </section>
+          )
         )}
 
         {/* Footer nav */}

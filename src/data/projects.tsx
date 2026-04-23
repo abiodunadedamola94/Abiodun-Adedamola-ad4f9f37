@@ -2,6 +2,10 @@ import { ReactNode } from "react";
 import jomppaLogo from "@/assets/jomppa-logo.avif";
 import dealmateMockup from "@/assets/dealmate-mockup.jpg";
 import leaptraWork from "@/assets/work-leaptra.png";
+import jomppaBanner from "@/assets/jomppa-banner.png";
+import ytfVideo from "@/assets/ytf-video.mp4";
+import leaptraProofBanner from "@/assets/leaptra-proof-banner.png";
+import leaptraLogo from "@/assets/leaptra-logo.png";
 
 export type ColorSwatch = { name: string; hex: string; usage: string };
 export type TypographyEntry = { family: string; usage: string; weights: string };
@@ -17,6 +21,8 @@ export type ProjectCaseStudy = {
   duration: string;
   platform: string;
   heroImage?: string;
+  heroVideo?: string;
+  proofImage?: string;
   liveUrl?: string;
   liveLabel?: string;
   secondaryUrl?: string;
@@ -52,6 +58,7 @@ export const projects: ProjectCaseStudy[] = [
     duration: "10 weeks",
     platform: "Web App + Marketing Site",
     heroImage: leaptraWork,
+    proofImage: leaptraProofBanner,
     liveUrl: "https://leaptra.com",
     liveLabel: "leaptra.com",
     secondaryUrl: "https://leaptra.ai",
@@ -59,11 +66,9 @@ export const projects: ProjectCaseStudy[] = [
     description:
       "A full AI automation platform with a clean, high-clarity website and product interface designed to educate, build trust, and drive conversion with smooth UX and sharp visual hierarchy.",
     icon: (
-      <Icon className="bg-gradient-to-br from-[#7b5cff] to-[#4617a9]">
-        <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
-          <path d="M2.5 10L6.5 3.5L10.5 10" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
-      </Icon>
+      <div className="flex h-7 w-7 items-center justify-center overflow-hidden rounded-md bg-black">
+        <img src={leaptraLogo} alt="LeapTra logo" className="h-full w-full object-contain p-0.5" />
+      </div>
     ),
     accentClass: "from-[#7b5cff] to-[#4617a9]",
     overview:
@@ -115,6 +120,7 @@ export const projects: ProjectCaseStudy[] = [
     industry: "Marketplace / Services",
     duration: "8 weeks",
     platform: "Mobile + Web",
+    heroImage: jomppaBanner,
     liveUrl: "https://jomppa.com",
     liveLabel: "jomppa.com",
     description:
@@ -172,6 +178,7 @@ export const projects: ProjectCaseStudy[] = [
     industry: "Non-profit / Education",
     duration: "5 weeks",
     platform: "Marketing Site",
+    heroVideo: ytfVideo,
     description:
       "A bold, reason-driven website for a youth development foundation—clear storytelling, strong visual identity, and purposeful content structure.",
     icon: (
