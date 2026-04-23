@@ -2,6 +2,10 @@ import { ReactNode } from "react";
 import jomppaLogo from "@/assets/jomppa-logo.avif";
 import dealmateMockup from "@/assets/dealmate-mockup.jpg";
 import leaptraWork from "@/assets/work-leaptra.png";
+import jomppaBanner from "@/assets/jomppa-banner.png";
+import ytfVideo from "@/assets/ytf-video.mp4";
+import leaptraProofBanner from "@/assets/leaptra-proof-banner.png";
+import leaptraLogo from "@/assets/leaptra-logo.png";
 
 export type ColorSwatch = { name: string; hex: string; usage: string };
 export type TypographyEntry = { family: string; usage: string; weights: string };
@@ -17,6 +21,8 @@ export type ProjectCaseStudy = {
   duration: string;
   platform: string;
   heroImage?: string;
+  heroVideo?: string;
+  proofImage?: string;
   liveUrl?: string;
   liveLabel?: string;
   secondaryUrl?: string;
