@@ -22,18 +22,76 @@ function esc(s: string | null | undefined) {
     .replace(/'/g, "&#39;");
 }
 
+// Simple in-memory rate limiter (best-effort; resets on cold start)
+const RATE_WINDOW_MS = 60_000;
+const RATE_MAX = 10; // 10 visit pings per IP per minute
+const ipHits = new Map<string, number[]>();
+
+function rateLimited(ip: string): boolean {
+  const now = Date.now();
+  const arr = (ipHits.get(ip) ?? []).filter((t) => now - t < RATE_WINDOW_MS);
+  if (arr.length >= RATE_MAX) {
+    ipHits.set(ip, arr);
+    return true;
+  }
+  arr.push(now);
+  ipHits.set(ip, arr);
+  return false;
+}
+
+function clip(s: unknown, max: number): string | null {
+  if (typeof s !== "string") return null;
+  return s.slice(0, max);
+}
+
+function genericError(status: number, message = "Internal server error") {
+  return new Response(JSON.stringify({ error: message }), {
+    status,
+    headers: { ...corsHeaders, "Content-Type": "application/json" },
+  });
+}
+
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") {
     return new Response("ok", { headers: corsHeaders });
   }
 
+  const ip =
+    req.headers.get("x-forwarded-for")?.split(",")[0].trim() ||
+    req.headers.get("cf-connecting-ip") ||
+    "unknown";
+
+  if (rateLimited(ip)) {
+    return new Response(JSON.stringify({ error: "Too many requests" }), {
+      status: 429,
+      headers: { ...corsHeaders, "Content-Type": "application/json" },
+    });
+  }
+
   try {
     const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
     const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY");
-    if (!LOVABLE_API_KEY) throw new Error("LOVABLE_API_KEY not configured");
-    if (!RESEND_API_KEY) throw new Error("RESEND_API_KEY not configured");
+    if (!LOVABLE_API_KEY || !RESEND_API_KEY) {
+      console.error("[notify-visit] missing API key configuration");
+      return genericError(500);
+    }
 
-    const p: Payload = await req.json();
+    let raw: Payload;
+    try {
+      raw = await req.json();
+    } catch {
+      return genericError(400, "Invalid request");
+    }
+
+    // Validate / clip every input
+    const p: Payload = {
+      path: clip(raw.path, 500) ?? "/",
+      referrer: clip(raw.referrer, 1000),
+      userAgent: clip(raw.userAgent, 500),
+      language: clip(raw.language, 20),
+      screenSize: clip(raw.screenSize, 20),
+      sessionId: clip(raw.sessionId, 64) ?? undefined,
+    };
 
     const html = `
       <div style="font-family:Arial,sans-serif;max-width:560px;margin:0 auto;padding:20px;color:#111">
@@ -64,25 +122,19 @@ Deno.serve(async (req) => {
       }),
     });
 
-    const data = await res.json();
+    const data = await res.json().catch(() => ({}));
     if (!res.ok) {
       console.error("[notify-visit] Resend error", res.status, data);
-      return new Response(JSON.stringify({ error: data }), {
-        status: 502,
-        headers: { ...corsHeaders, "Content-Type": "application/json" },
-      });
+      return genericError(502, "Email delivery failed");
     }
 
-    return new Response(JSON.stringify({ success: true, id: data.id }), {
+    return new Response(JSON.stringify({ success: true }), {
       status: 200,
       headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
   } catch (err) {
-    const msg = err instanceof Error ? err.message : "Unknown error";
-    console.error("[notify-visit] failed", msg);
-    return new Response(JSON.stringify({ error: msg }), {
-      status: 500,
-      headers: { ...corsHeaders, "Content-Type": "application/json" },
-    });
+    const detail = err instanceof Error ? err.message : "Unknown error";
+    console.error("[notify-visit] failed", detail);
+    return genericError(500);
   }
 });
