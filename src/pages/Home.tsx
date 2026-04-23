@@ -56,7 +56,7 @@ export default function Home() {
           <div className="rounded-[26px] bg-gradient-to-br from-[#6b4bff] via-[#1f67ff] to-[#23d8b9] p-[1px] shadow-[0_18px_60px_rgba(60,40,160,0.22)]">
             <div className="overflow-hidden rounded-[25px] border border-border/20 bg-card">
               <Link to="/projects/leaptra" className="block">
-                <div className="relative aspect-[1.55/1] overflow-hidden bg-[linear-gradient(135deg,#121212_0%,#0a0a0a_100%)]">
+                <div className="relative aspect-[1.55/1] overflow-hidden bg-[linear-gradient(135deg,hsl(var(--muted))_0%,hsl(var(--secondary))_100%)]">
                   <img
                     src={workLeaptra}
                     alt="LeapTra AI work section"
