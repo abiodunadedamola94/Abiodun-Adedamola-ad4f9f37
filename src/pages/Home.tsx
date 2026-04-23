@@ -1,6 +1,7 @@
 import { ArrowUpRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import workLeaptra from "@/assets/work-leaptra.png";
+import avatarImg from "@/assets/avatar.jpg";
 
 export default function Home() {
   return (
@@ -9,19 +10,13 @@ export default function Home() {
         {/* Hero */}
         <section className="pt-4 sm:pt-8">
           <div className="mb-4">
-            <div className="h-10 w-10 overflow-hidden rounded-full border border-border bg-card shadow-[0_0_0_1px_rgba(255,255,255,0.04)]">
-              <svg viewBox="0 0 40 40" className="h-full w-full">
-                <defs>
-                  <radialGradient id="avatarGlow" cx="35%" cy="30%" r="80%">
-                    <stop offset="0%" stopColor="#6a6a6a" />
-                    <stop offset="60%" stopColor="#242424" />
-                    <stop offset="100%" stopColor="#0d0d0d" />
-                  </radialGradient>
-                </defs>
-                <rect width="40" height="40" rx="20" fill="url(#avatarGlow)" />
-                <circle cx="20" cy="16" r="7" fill="#9f9f9f" opacity="0.92" />
-                <path d="M10 34c1.8-6 5.2-9 10-9s8.2 3 10 9" fill="#6f6f6f" opacity="0.82" />
-              </svg>
+            <div className="h-10 w-10 overflow-hidden rounded-full border border-border bg-card shadow-[0_0_0_1px_rgba(0,0,0,0.04)]">
+              <img
+                src={avatarImg}
+                alt="Adedamola Ade profile avatar"
+                className="h-full w-full object-cover"
+                loading="eager"
+              />
             </div>
           </div>
 
