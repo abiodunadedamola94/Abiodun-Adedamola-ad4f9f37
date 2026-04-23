@@ -264,28 +264,65 @@ export default function ProjectDetail() {
 
         {/* Visit live (footer CTA) */}
         {project.liveUrl && (
-          <section className={`rounded-2xl border border-border bg-gradient-to-br ${project.accentClass} p-5`}>
-            <p className="text-[10px] uppercase tracking-[0.14em] text-white/80">Proof of work</p>
-            <p className="mt-1 text-[13px] font-semibold text-white">See {project.name} live</p>
-            <a
-              href={project.liveUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-white/15 px-3 py-1.5 text-[11px] font-medium text-white backdrop-blur transition-colors hover:bg-white/25"
-            >
-              <ExternalLink size={11} /> {project.liveLabel ?? project.liveUrl}
-            </a>
-            {project.secondaryUrl && (
+          project.proofImage ? (
+            <section className="overflow-hidden rounded-2xl border border-border bg-black">
+              <div className="relative aspect-[1920/600] w-full">
+                <img
+                  src={project.proofImage}
+                  alt={`${project.name} proof of work banner`}
+                  className="h-full w-full object-cover"
+                  loading="lazy"
+                />
+              </div>
+              <div className="p-5">
+                <p className="text-[10px] uppercase tracking-[0.14em] text-muted-foreground">Proof of work</p>
+                <p className="mt-1 text-[13px] font-semibold text-foreground">See {project.name} live</p>
+                <div className="mt-3 flex flex-wrap gap-2">
+                  <a
+                    href={project.liveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`inline-flex items-center gap-1.5 rounded-full bg-gradient-to-br ${project.accentClass} px-3 py-1.5 text-[11px] font-medium text-white transition-opacity hover:opacity-90`}
+                  >
+                    <ExternalLink size={11} /> {project.liveLabel ?? project.liveUrl}
+                  </a>
+                  {project.secondaryUrl && (
+                    <a
+                      href={project.secondaryUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-3 py-1.5 text-[11px] font-medium text-foreground transition-colors hover:bg-secondary"
+                    >
+                      <ExternalLink size={11} /> {project.secondaryLabel}
+                    </a>
+                  )}
+                </div>
+              </div>
+            </section>
+          ) : (
+            <section className={`rounded-2xl border border-border bg-gradient-to-br ${project.accentClass} p-5`}>
+              <p className="text-[10px] uppercase tracking-[0.14em] text-white/80">Proof of work</p>
+              <p className="mt-1 text-[13px] font-semibold text-white">See {project.name} live</p>
               <a
-                href={project.secondaryUrl}
+                href={project.liveUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="ml-2 mt-3 inline-flex items-center gap-1.5 rounded-full bg-white/15 px-3 py-1.5 text-[11px] font-medium text-white backdrop-blur transition-colors hover:bg-white/25"
+                className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-white/15 px-3 py-1.5 text-[11px] font-medium text-white backdrop-blur transition-colors hover:bg-white/25"
               >
-                <ExternalLink size={11} /> {project.secondaryLabel}
+                <ExternalLink size={11} /> {project.liveLabel ?? project.liveUrl}
               </a>
-            )}
-          </section>
+              {project.secondaryUrl && (
+                <a
+                  href={project.secondaryUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="ml-2 mt-3 inline-flex items-center gap-1.5 rounded-full bg-white/15 px-3 py-1.5 text-[11px] font-medium text-white backdrop-blur transition-colors hover:bg-white/25"
+                >
+                  <ExternalLink size={11} /> {project.secondaryLabel}
+                </a>
+              )}
+            </section>
+          )
         )}
 
         {/* Footer nav */}
