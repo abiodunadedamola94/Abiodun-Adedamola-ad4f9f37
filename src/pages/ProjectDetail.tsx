@@ -6,6 +6,20 @@ import { getProject } from "@/data/projects";
 export default function ProjectDetail() {
   const { id } = useParams<{ id: string }>();
   const project = id ? getProject(id) : undefined;
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  const togglePlay = () => {
+    const v = videoRef.current;
+    if (!v) return;
+    if (v.paused) {
+      v.play();
+      setIsPlaying(true);
+    } else {
+      v.pause();
+      setIsPlaying(false);
+    }
+  };
 
   if (!project) {
     return (
