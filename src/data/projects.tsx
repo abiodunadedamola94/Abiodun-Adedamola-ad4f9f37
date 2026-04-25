@@ -7,6 +7,21 @@ import ytfVideo from "@/assets/ytf-video.mp4";
 import leaptraProofBanner from "@/assets/leaptra-proof-banner.png";
 import leaptraLogo from "@/assets/leaptra-logo.png";
 
+// Responsive WebP variants (auto-generated alongside the originals)
+import leaptraWork480 from "@/assets/work-leaptra-480.webp";
+import leaptraWork960 from "@/assets/work-leaptra-960.webp";
+import leaptraWork1440 from "@/assets/work-leaptra-1440.webp";
+import jomppaBanner480 from "@/assets/jomppa-banner-480.webp";
+import jomppaBanner960 from "@/assets/jomppa-banner-960.webp";
+import jomppaBanner1440 from "@/assets/jomppa-banner-1440.webp";
+import dealmateMockup480 from "@/assets/dealmate-mockup-480.webp";
+import dealmateMockup960 from "@/assets/dealmate-mockup-960.webp";
+import dealmateMockup1440 from "@/assets/dealmate-mockup-1440.webp";
+import leaptraProof480 from "@/assets/leaptra-proof-banner-480.webp";
+import leaptraProof960 from "@/assets/leaptra-proof-banner-960.webp";
+import leaptraProof1440 from "@/assets/leaptra-proof-banner-1440.webp";
+import ytfPoster from "@/assets/ytf-poster.jpg";
+
 export type ColorSwatch = { name: string; hex: string; usage: string };
 export type TypographyEntry = { family: string; usage: string; weights: string };
 
