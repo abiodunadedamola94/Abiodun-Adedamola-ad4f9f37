@@ -36,8 +36,11 @@ export type ProjectCaseStudy = {
   duration: string;
   platform: string;
   heroImage?: string;
+  heroImageSources?: Record<number, string>;
   heroVideo?: string;
+  heroPoster?: string;
   proofImage?: string;
+  proofImageSources?: Record<number, string>;
   liveUrl?: string;
   liveLabel?: string;
   secondaryUrl?: string;
