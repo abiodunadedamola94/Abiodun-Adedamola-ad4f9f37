@@ -7,6 +7,21 @@ import ytfVideo from "@/assets/ytf-video.mp4";
 import leaptraProofBanner from "@/assets/leaptra-proof-banner.png";
 import leaptraLogo from "@/assets/leaptra-logo.png";
 
+// Responsive WebP variants (auto-generated alongside the originals)
+import leaptraWork480 from "@/assets/work-leaptra-480.webp";
+import leaptraWork960 from "@/assets/work-leaptra-960.webp";
+import leaptraWork1440 from "@/assets/work-leaptra-1440.webp";
+import jomppaBanner480 from "@/assets/jomppa-banner-480.webp";
+import jomppaBanner960 from "@/assets/jomppa-banner-960.webp";
+import jomppaBanner1440 from "@/assets/jomppa-banner-1440.webp";
+import dealmateMockup480 from "@/assets/dealmate-mockup-480.webp";
+import dealmateMockup960 from "@/assets/dealmate-mockup-960.webp";
+import dealmateMockup1440 from "@/assets/dealmate-mockup-1440.webp";
+import leaptraProof480 from "@/assets/leaptra-proof-banner-480.webp";
+import leaptraProof960 from "@/assets/leaptra-proof-banner-960.webp";
+import leaptraProof1440 from "@/assets/leaptra-proof-banner-1440.webp";
+import ytfPoster from "@/assets/ytf-poster.jpg";
+
 export type ColorSwatch = { name: string; hex: string; usage: string };
 export type TypographyEntry = { family: string; usage: string; weights: string };
 
@@ -21,8 +36,11 @@ export type ProjectCaseStudy = {
   duration: string;
   platform: string;
   heroImage?: string;
+  heroImageSources?: Record<number, string>;
   heroVideo?: string;
+  heroPoster?: string;
   proofImage?: string;
+  proofImageSources?: Record<number, string>;
   liveUrl?: string;
   liveLabel?: string;
   secondaryUrl?: string;
@@ -58,7 +76,9 @@ export const projects: ProjectCaseStudy[] = [
     duration: "10 weeks",
     platform: "Web App + Marketing Site",
     heroImage: leaptraWork,
+    heroImageSources: { 480: leaptraWork480, 960: leaptraWork960, 1440: leaptraWork1440 },
     proofImage: leaptraProofBanner,
+    proofImageSources: { 480: leaptraProof480, 960: leaptraProof960, 1440: leaptraProof1440 },
     liveUrl: "https://leaptra.com",
     liveLabel: "leaptra.com",
     secondaryUrl: "https://leaptra.ai",
@@ -121,6 +141,7 @@ export const projects: ProjectCaseStudy[] = [
     duration: "8 weeks",
     platform: "Mobile + Web",
     heroImage: jomppaBanner,
+    heroImageSources: { 480: jomppaBanner480, 960: jomppaBanner960, 1440: jomppaBanner1440 },
     liveUrl: "https://jomppa.com",
     liveLabel: "jomppa.com",
     description:
@@ -179,6 +200,7 @@ export const projects: ProjectCaseStudy[] = [
     duration: "5 weeks",
     platform: "Marketing Site",
     heroVideo: ytfVideo,
+    heroPoster: ytfPoster,
     description:
       "A bold, reason-driven website for a youth development foundation—clear storytelling, strong visual identity, and purposeful content structure.",
     icon: (
@@ -288,6 +310,7 @@ export const projects: ProjectCaseStudy[] = [
     duration: "12 weeks",
     platform: "Web + Mobile",
     heroImage: dealmateMockup,
+    heroImageSources: { 480: dealmateMockup480, 960: dealmateMockup960, 1440: dealmateMockup1440 },
     description:
       "A secure and transparent escrow system designed to protect both buyers and sellers in high-value transactions with a clear, trustworthy interface.",
     icon: (
