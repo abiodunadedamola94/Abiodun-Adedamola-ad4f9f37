@@ -76,7 +76,9 @@ export const projects: ProjectCaseStudy[] = [
     duration: "10 weeks",
     platform: "Web App + Marketing Site",
     heroImage: leaptraWork,
+    heroImageSources: { 480: leaptraWork480, 960: leaptraWork960, 1440: leaptraWork1440 },
     proofImage: leaptraProofBanner,
+    proofImageSources: { 480: leaptraProof480, 960: leaptraProof960, 1440: leaptraProof1440 },
     liveUrl: "https://leaptra.com",
     liveLabel: "leaptra.com",
     secondaryUrl: "https://leaptra.ai",
@@ -139,6 +141,7 @@ export const projects: ProjectCaseStudy[] = [
     duration: "8 weeks",
     platform: "Mobile + Web",
     heroImage: jomppaBanner,
+    heroImageSources: { 480: jomppaBanner480, 960: jomppaBanner960, 1440: jomppaBanner1440 },
     liveUrl: "https://jomppa.com",
     liveLabel: "jomppa.com",
     description:
@@ -197,6 +200,7 @@ export const projects: ProjectCaseStudy[] = [
     duration: "5 weeks",
     platform: "Marketing Site",
     heroVideo: ytfVideo,
+    heroPoster: ytfPoster,
     description:
       "A bold, reason-driven website for a youth development foundation—clear storytelling, strong visual identity, and purposeful content structure.",
     icon: (
@@ -306,6 +310,7 @@ export const projects: ProjectCaseStudy[] = [
     duration: "12 weeks",
     platform: "Web + Mobile",
     heroImage: dealmateMockup,
+    heroImageSources: { 480: dealmateMockup480, 960: dealmateMockup960, 1440: dealmateMockup1440 },
     description:
       "A secure and transparent escrow system designed to protect both buyers and sellers in high-value transactions with a clear, trustworthy interface.",
     icon: (
