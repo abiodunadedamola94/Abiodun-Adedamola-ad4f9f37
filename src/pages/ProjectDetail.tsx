@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { ArrowLeft, ArrowUpRight, ExternalLink, Pause, Play } from "lucide-react";
 import { getProject } from "@/data/projects";
+import { ResponsiveImage } from "@/components/media/ResponsiveImage";
 
 export default function ProjectDetail() {
   const { id } = useParams<{ id: string }>();
@@ -97,9 +98,10 @@ export default function ProjectDetail() {
             <video
               ref={videoRef}
               src={project.heroVideo}
+              poster={project.heroPoster}
               className="h-full w-full object-cover"
               playsInline
-              preload="metadata"
+              preload="none"
               onPlay={() => setIsPlaying(true)}
               onPause={() => setIsPlaying(false)}
               onEnded={() => setIsPlaying(false)}
@@ -120,11 +122,13 @@ export default function ProjectDetail() {
           </div>
         ) : project.heroImage ? (
           <div className="relative overflow-hidden rounded-2xl border border-border aspect-[16/9] bg-card">
-            <img
+            <ResponsiveImage
               src={project.heroImage}
+              sources={project.heroImageSources}
               alt={`${project.name} hero`}
               className="h-full w-full object-cover"
               loading="lazy"
+              sizes="(max-width: 640px) 100vw, 560px"
             />
           </div>
         ) : (
@@ -267,11 +271,13 @@ export default function ProjectDetail() {
           project.proofImage ? (
             <section className="overflow-hidden rounded-2xl border border-border bg-black">
               <div className="relative aspect-[1920/600] w-full">
-                <img
+                <ResponsiveImage
                   src={project.proofImage}
+                  sources={project.proofImageSources}
                   alt={`${project.name} proof of work banner`}
                   className="h-full w-full object-cover"
                   loading="lazy"
+                  sizes="(max-width: 640px) 100vw, 560px"
                 />
               </div>
               <div className="p-5">
