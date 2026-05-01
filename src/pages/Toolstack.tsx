@@ -22,6 +22,64 @@ const tools = [
     ),
   },
   {
+    name: "Claude",
+    icon: (
+      <div className="flex h-5 w-5 items-center justify-center rounded bg-[#cc9b7a]">
+        <span className="text-[10px] font-bold leading-none text-white">C</span>
+      </div>
+    ),
+  },
+  {
+    name: "Google Stitch",
+    icon: (
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+        <circle cx="12" cy="12" r="9" fill="none" stroke="#4285F4" strokeWidth="2" />
+        <path d="M7 12h10M12 7v10" stroke="#EA4335" strokeWidth="2" strokeLinecap="round" />
+      </svg>
+    ),
+  },
+  {
+    name: "Antigravity",
+    icon: (
+      <div className="flex h-5 w-5 items-center justify-center rounded bg-gradient-to-br from-[#7b5cff] to-[#23d8b9]">
+        <span className="text-[10px] font-bold leading-none text-white">A</span>
+      </div>
+    ),
+  },
+  {
+    name: "Trae AI",
+    icon: (
+      <div className="flex h-5 w-5 items-center justify-center rounded bg-black">
+        <span className="text-[9px] font-bold leading-none text-white">Tr</span>
+      </div>
+    ),
+  },
+  {
+    name: "VS Code",
+    icon: (
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+        <path d="M17 2L7 11L3 8L2 9V15L3 16L7 13L17 22L22 20V4L17 2Z" fill="#007ACC" />
+        <path d="M17 2V22L22 20V4L17 2Z" fill="#0098FF" />
+      </svg>
+    ),
+  },
+  {
+    name: "ChatGPT",
+    icon: (
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="#10A37F">
+        <path d="M22.2819 9.8211a5.9847 5.9847 0 0 0-.5157-4.9108 6.0462 6.0462 0 0 0-6.5098-2.9A6.0651 6.0651 0 0 0 4.9807 4.1818a5.9847 5.9847 0 0 0-3.9977 2.9 6.0462 6.0462 0 0 0 .7427 7.0966 5.98 5.98 0 0 0 .511 4.9107 6.051 6.051 0 0 0 6.5146 2.9001A5.9847 5.9847 0 0 0 13.2599 24a6.0557 6.0557 0 0 0 5.7718-4.2058 5.9894 5.9894 0 0 0 3.9977-2.9001 6.0557 6.0557 0 0 0-.7475-7.0729z" />
+      </svg>
+    ),
+  },
+  {
+    name: "Framer",
+    icon: (
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+        <path d="M4 0H20V8H12L20 16H12V24L4 16V8H12L4 0Z" fill="currentColor" className="text-foreground" />
+      </svg>
+    ),
+  },
+  {
     name: "After Effects",
     icon: (
       <div className="flex h-5 w-5 items-center justify-center rounded bg-[#1a0a2e]">
@@ -30,19 +88,11 @@ const tools = [
     ),
   },
   {
-    name: "ChatGPT",
+    name: "Notion",
     icon: (
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-        <path d="M22.2819 9.8211a5.9847 5.9847 0 0 0-.5157-4.9108 6.0462 6.0462 0 0 0-6.5098-2.9A6.0651 6.0651 0 0 0 4.9807 4.1818a5.9847 5.9847 0 0 0-3.9977 2.9 6.0462 6.0462 0 0 0 .7427 7.0966 5.98 5.98 0 0 0 .511 4.9107 6.051 6.051 0 0 0 6.5146 2.9001A5.9847 5.9847 0 0 0 13.2599 24a6.0557 6.0557 0 0 0 5.7718-4.2058 5.9894 5.9894 0 0 0 3.9977-2.9001 6.0557 6.0557 0 0 0-.7475-7.0729z" fill="white" />
-      </svg>
-    ),
-  },
-  {
-    name: "Framer",
-    icon: (
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-        <path d="M4 0H20V8H12L20 16H12V24L4 16V8H12L4 0Z" fill="white" />
-      </svg>
+      <div className="flex h-5 w-5 items-center justify-center rounded bg-white border border-border">
+        <span className="text-[10px] font-bold leading-none text-black">N</span>
+      </div>
     ),
   },
   {
@@ -56,12 +106,12 @@ const tools = [
 ];
 
 const skills = [
-  "UX/UI Design",
-  "Cognitive Design",
-  "Unbranded and Rebranding",
-  "Product Design",
-  "Website Design",
-  "Mobile App Design",
+  "Product & UX Design",
+  "AI Vibe Coding",
+  "Product Motion (Figma)",
+  "Editorial Storytelling",
+  "Branding & Identity",
+  "Design Systems",
   "Prototyping",
 ];
 
