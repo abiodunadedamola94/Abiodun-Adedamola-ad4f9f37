@@ -1,5 +1,6 @@
 import { Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { ThemeToggle } from "@/components/theme/ThemeToggle";
 
 interface MobileHeaderProps {
   onMenuClick: () => void;
@@ -12,14 +13,17 @@ export function MobileHeader({ onMenuClick }: MobileHeaderProps) {
         <h1 className="font-display font-semibold text-lg gradient-text">
           Portfolio
         </h1>
-        <Button
-          variant="ghost"
-          size="icon"
-          onClick={onMenuClick}
-          className="hover:bg-secondary"
-        >
-          <Menu className="w-5 h-5" />
-        </Button>
+        <div className="flex items-center gap-2">
+          <ThemeToggle />
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={onMenuClick}
+            className="hover:bg-secondary"
+          >
+            <Menu className="w-5 h-5" />
+          </Button>
+        </div>
       </div>
     </header>
   );

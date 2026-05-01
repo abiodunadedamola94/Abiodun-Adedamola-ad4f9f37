@@ -124,14 +124,21 @@ export default function Home() {
         <footer className="pb-8 pt-4 reveal">
           <div className="flex flex-col items-center gap-5 text-center">
             <div className="flex items-center gap-4">
-              {["Instagram", "LinkedIn", "Twitter", "YouTube"].map((label) => (
-                <button
+              {[
+                { label: "Instagram", href: "https://www.instagram.com/official_damoskylala?igsh=MTh3dDFkN2RqaWhxZA%3D%3D&utm_source=qr" },
+                { label: "LinkedIn", href: "https://www.linkedin.com/in/abiodun-adedamola-605398289?trk=contact-info" },
+                { label: "Twitter", href: "#" },
+                { label: "YouTube", href: "#" },
+              ].map(({ label, href }) => (
+                <a
                   key={label}
-                  type="button"
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="relative text-[11px] text-muted-foreground transition-colors hover:text-foreground after:absolute after:left-0 after:-bottom-0.5 after:h-px after:w-full after:origin-right after:scale-x-0 after:bg-foreground after:transition-transform after:duration-300 hover:after:origin-left hover:after:scale-x-100"
                 >
                   {label}
-                </button>
+                </a>
               ))}
             </div>
             <p className="text-[10px] text-muted-foreground/60">Adedamola Ade — Product Designer</p>
