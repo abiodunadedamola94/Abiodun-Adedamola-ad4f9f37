@@ -67,33 +67,19 @@ export default function Contact() {
 
     setSubmitting(true);
     try {
-      const { data: inserted, error } = await supabase
-        .from("contact_messages")
-        .insert({
-          full_name: parsed.data.fullName,
+      const { error } = await supabase.functions.invoke("notify-contact", {
+        body: {
+          fullName: parsed.data.fullName,
           email: parsed.data.email,
           message: parsed.data.message,
-        })
-        .select("id")
-        .single();
+        },
+      });
 
       if (error) {
-        console.error("[contact] insert failed", error);
-        toast.error("Could not send your message. Please try again.");
+        console.error("[contact] notify failed", error);
+        toast.error("Can't send message now, try again");
         return;
       }
-
-      // Fire notification email (don't block UX on it)
-      supabase.functions
-        .invoke("notify-contact", {
-          body: {
-            id: inserted?.id,
-            fullName: parsed.data.fullName,
-            email: parsed.data.email,
-            message: parsed.data.message,
-          },
-        })
-        .catch((err) => console.warn("[contact] notify failed", err));
 
       setSubmitted(true);
       setFullName("");
