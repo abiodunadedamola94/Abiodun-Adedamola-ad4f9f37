@@ -1,0 +1,1 @@
+GRANT INSERT ON TABLE public.contact_messages TO anon, authenticated;
