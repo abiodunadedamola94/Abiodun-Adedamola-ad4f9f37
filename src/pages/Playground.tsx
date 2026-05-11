@@ -1,4 +1,5 @@
 import { ArrowUpRight } from "lucide-react";
+import InvoiceBuilder from "@/components/invoice/InvoiceBuilder";
 
 const experiments = [
   {
@@ -41,8 +42,8 @@ const experiments = [
 export default function Playground() {
   return (
     <div className="min-h-screen px-5 py-10 sm:px-6 sm:py-12">
-      <div className="max-w-[560px] mx-auto space-y-8">
-        <section>
+      <div className="max-w-[1100px] mx-auto space-y-12">
+        <section className="max-w-[560px]">
           <h2 className="mb-1 text-[15px] font-semibold tracking-tight text-foreground">
             Playground
           </h2>
