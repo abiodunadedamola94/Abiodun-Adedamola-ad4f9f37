@@ -84,6 +84,16 @@ export default function Playground() {
             ))}
           </div>
         </section>
+
+        <section>
+          <h2 className="mb-1 text-[15px] font-semibold tracking-tight text-foreground">
+            Invoice Builder
+          </h2>
+          <p className="mb-6 text-xs leading-5 text-muted-foreground">
+            Draft a professional invoice, preview it live, then download or share with your client.
+          </p>
+          <InvoiceBuilder />
+        </section>
       </div>
     </div>
   );
